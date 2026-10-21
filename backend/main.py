@@ -18,7 +18,11 @@ from backend.predictor import (
 
 
 app = FastAPI(title="SafeText AI", version="1.0.0")
-local_origins = ["http://localhost:5173", "http://127.0.0.1:5173"]
+default_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://safetext-ai-anushka-kachare.netlify.app",
+]
 configured_origins = [
     origin.strip()
     for origin in os.getenv("FRONTEND_ORIGINS", "").split(",")
@@ -26,7 +30,7 @@ configured_origins = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=list(dict.fromkeys([*local_origins, *configured_origins])),
+    allow_origins=list(dict.fromkeys([*default_origins, *configured_origins])),
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
