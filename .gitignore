@@ -10,6 +10,7 @@ frontend/dist/
 **/.env
 !**/.env.example
 .netlify/
+.agents/skills/
 labeled_data.csv
 *.log
 *.tmp
